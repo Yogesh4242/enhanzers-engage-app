@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { supabase } from "@/lib/supabaseClient"
+import { useEffect, useState, useMemo } from 'react'
+import { createClient } from "@/lib/supabase/client"
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { 
-  User, 
+  User as UserIcon, 
   Mail, 
   Building, 
   ArrowLeft, 
@@ -15,12 +15,14 @@ import {
   Shield,
   CheckCircle2
 } from 'lucide-react'
+import type { User } from '@supabase/supabase-js'
 
 export default function ProfilePage() {
   const router = useRouter()
+  const supabase = useMemo(() => createClient(), [])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [successMessage, setSuccessMessage] = useState('')
   
   // Profile form states
@@ -44,14 +46,14 @@ export default function ProfilePage() {
     }
 
     getProfile()
-  }, [router])
+  }, [router, supabase.auth])
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
     setSuccessMessage('')
 
-    const { data, error } = await supabase.auth.updateUser({
+    const { error } = await supabase.auth.updateUser({
       data: { 
         full_name: fullName,
         business_name: businessName
@@ -135,7 +137,7 @@ export default function ProfilePage() {
                 Full Identity Name
               </label>
               <div className="relative">
-                <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#2A2A2A]/40" />
+                <UserIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#2A2A2A]/40" />
                 <input
                   type="text"
                   value={fullName}

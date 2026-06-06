@@ -30,9 +30,8 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         
-        <SmoothScroll>
+        
         {children}
-        </SmoothScroll>
         
         </body>
     </html>

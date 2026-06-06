@@ -2,25 +2,30 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "../../lib/supabaseClient";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
 
 export default function SignupPage() {
   const router = useRouter();
+  const supabase = createClient();
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("customer");
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleSignup = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setLoading(true);
     setMessage("");
 
+    const cleanEmail = email.trim().toLowerCase();
+
     const { data, error } = await supabase.auth.signUp({
-      email,
+      email: cleanEmail,
       password,
     });
 
@@ -38,12 +43,14 @@ export default function SignupPage() {
       return;
     }
 
-    const { error: profileError } = await supabase.from("profiles").insert({
-      id: user.id,
-      full_name: fullName,
-      email: email,
-      role: role,
-    });
+    const { error: profileError } = await supabase.rpc(
+      "create_profile_for_signup",
+      {
+        user_id: user.id,
+        user_full_name: fullName,
+        user_email: cleanEmail,
+      }
+    );
 
     if (profileError) {
       setMessage(profileError.message);
@@ -51,10 +58,11 @@ export default function SignupPage() {
       return;
     }
 
-    setMessage("Signup successful!");
+    setMessage("Signup successful! Please login.");
     setLoading(false);
 
-    router.push("/login");
+    router.replace("/login");
+    router.refresh();
   };
 
   return (
@@ -107,17 +115,9 @@ export default function SignupPage() {
           />
         </div>
 
-        <div>
-          <label className="block mb-2 text-sm">Role</label>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 outline-none"
-          >
-            <option value="customer">Customer</option>
-            <option value="worker">Worker</option>
-            <option value="owner">Owner</option>
-          </select>
+        <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-4 text-sm text-neutral-400">
+          New users are created as customers by default. Staff and owner access
+          is assigned only to approved emails.
         </div>
 
         {message && <p className="text-sm text-yellow-400">{message}</p>}
@@ -125,10 +125,17 @@ export default function SignupPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 rounded-xl bg-white text-black font-semibold hover:bg-neutral-200 transition"
+          className="w-full py-3 rounded-xl bg-white text-black font-semibold hover:bg-neutral-200 transition disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {loading ? "Creating..." : "Sign Up"}
         </button>
+
+        <p className="text-sm text-neutral-400 text-center">
+          Already have an account?{" "}
+          <Link href="/login" className="text-white hover:underline">
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   );

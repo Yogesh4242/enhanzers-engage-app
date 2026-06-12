@@ -20,13 +20,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const sidebarItems = [
-  { name: "Home",      icon: LayoutDashboard,   href: "/dashboard/owner-dashboard" },
-  { name: "Overview",  icon: SquareChartGantt,  href: "/dashboard/owner-dashboard/overview" },
-  { name: "Campaigns", icon: Megaphone,         href: "/dashboard/owner-dashboard/campaigns" },
-  { name: "Loyalty",   icon: Heart,             href: "/dashboard/owner-dashboard/loyalty" },
-  { name: "Customers", icon: Users,             href: "/dashboard/owner-dashboard/customers" },
-  { name: "tables",    icon: HandPlatter,       href: "/dashboard/owner-dashboard/tables" },
-  { name: "Feedback",  icon: MessageSquare,     href: "/dashboard/owner-dashboard/feedback" },
+
+  { name: "Customers", icon: Users,             href: "/dashboard/worker-dashboard/" },
+  { name: "Owner ?", icon: Users,             href: "/dashboard/owner-dashboard/" },
+
 ];
 
 export default function SidePanel() {

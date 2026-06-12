@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import SidePanel from "../components/sidepanel";
 import Link from "next/link";
 import { 
   ArrowLeft, Plus, Search, Filter, Download, Mail, Phone, 

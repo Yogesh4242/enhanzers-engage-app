@@ -1,0 +1,89 @@
+{
+  "tables": [
+    {
+      "id": "TBL001",
+      "tableNumber": 1,
+      "qrCode": "https://enhanzers-engage.com/order/table/1/1780924742149",
+      "status": "available",
+      "currentOrder": null,
+      "lastOrderDate": "2026-06-08",
+      "totalOrders": 33,
+      "totalRevenue": 33264
+    },
+    {
+      "id": "TBL002",
+      "tableNumber": 2,
+      "qrCode": "https://enhanzers-engage.com/order/table/2/1780924742149",
+      "status": "reserved",
+      "currentOrder": null,
+      "lastOrderDate": "2026-06-05",
+      "totalOrders": 10,
+      "totalRevenue": 3820
+    },
+    {
+      "id": "TBL003",
+      "tableNumber": 3,
+      "qrCode": "https://enhanzers-engage.com/order/table/3/1780924742149",
+      "status": "reserved",
+      "currentOrder": null,
+      "lastOrderDate": "2026-06-02",
+      "totalOrders": 13,
+      "totalRevenue": 11271
+    },
+    {
+      "id": "TBL004",
+      "tableNumber": 4,
+      "qrCode": "https://enhanzers-engage.com/order/table/4/1780924742149",
+      "status": "available",
+      "currentOrder": null,
+      "lastOrderDate": "2026-06-03",
+      "totalOrders": 30,
+      "totalRevenue": 30480
+    },
+    {
+      "id": "TBL005",
+      "tableNumber": 5,
+      "qrCode": "https://enhanzers-engage.com/order/table/5/1780924742149",
+      "status": "occupied",
+      "currentOrder": null,
+      "lastOrderDate": "2026-06-02",
+      "totalOrders": 49,
+      "totalRevenue": 19845
+    },
+    {
+      "id": "TBL006",
+      "tableNumber": 6,
+      "qrCode": "https://enhanzers-engage.com/order/table/6/1780924742239",
+      "status": "occupied",
+      "currentOrder": {
+        "id": "ORD17809247421496",
+        "items": [
+          {
+            "id": "ITEM1",
+            "name": "Margherita Pizza",
+            "quantity": 2,
+            "price": 161
+          },
+          {
+            "id": "ITEM2",
+            "name": "Garlic Bread",
+            "quantity": 3,
+            "price": 171
+          },
+          {
+            "id": "ITEM3",
+            "name": "Cold Coffee",
+            "quantity": 2,
+            "price": 367
+          }
+        ],
+        "total": 1569,
+        "customerName": "Customer F",
+        "orderTime": "6:49:02 PM"
+      },
+      "lastOrderDate": "2026-06-02",
+      "totalOrders": 12,
+      "totalRevenue": 6420
+    }
+  ]
+}

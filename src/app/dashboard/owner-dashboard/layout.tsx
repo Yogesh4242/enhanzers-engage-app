@@ -1,6 +1,17 @@
 import type { ReactNode } from "react";
 import Sidebar from "./components/sidepanel";
 import Navbar from "./components/topnav";
+import { Metadata } from "next";
+
+
+
+export const metadata: Metadata = {
+  title: "Dashboard - Engage from Enhanzers",
+  description:
+    "A complete restaurant loyalty and customer retention platform.",
+};
+
+
 
 export default function OwnerDashboardLayout({
   children,
